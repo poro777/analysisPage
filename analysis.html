@@ -263,7 +263,8 @@
   let chartMap;
   let pie;
   let lineChart;
-
+  
+  let tmpColor;
 
   const beginYear = 2018;
   const endYear = 2022;
@@ -372,7 +373,7 @@
   lineChart = new Chart(document.getElementById("line").getContext("2d"), lineConfig);
 
   
-  let tmpColor = cityList.map((v, i, a) => mycolor[xValues.indexOf(v)]); //citylist
+  tmpColor = cityList.map((v, i, a) => mycolor[xValues.indexOf(v)]); //citylist
   //https://unpkg.com/us-atlas/states-10m.json
   //https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/twn.json 
   fetch('./tw.json').then((r) => r.json()).then((tw) => {
