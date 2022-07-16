@@ -272,7 +272,7 @@
   const host = "http://localhost:8000"
   let mydata;
   // get data
-  fetch('./static/analysis.csv').then(response => response.text())
+  fetch('./analysis.csv').then(response => response.text())
     .then(function (a) {
       mydata = $.csv.toArrays(a).map(arr => arr.map(str => parseFloat(str)));
       console.log(mydata);
