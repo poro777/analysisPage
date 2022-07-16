@@ -7,6 +7,7 @@
     crossorigin="anonymous"></script>
   <script src="./chart.min.js"></script>
   <script src="./index.umd.min.js"></script>
+  <script src="./jquery-csv.js"></script>
 
   <!-- https://github.com/DavideViolante/chartjs-plugin-labels -->
   <script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
@@ -271,26 +272,20 @@
   const host = "http://localhost:8000"
   let mydata;
   // get data
-  $.ajax({
-    type: "GET",
-    url: "./analysis.csv",
-    dataType: "json",
-    success: function (response) {
-      mydata = Array.from(response);
+  fetch('./static/analysis.csv').then(response => response.text())
+    .then(function (a) {
+      mydata = $.csv.toArrays(a).map(arr => arr.map(str => parseFloat(str)));
+      console.log(mydata);
       for (let i = 0; i < 22; i++) {
         yValues[i] = 0;
         for (let o = 0; o < 12; o++) {
-          yValues[i] += mydata[i][o];
+          yValues[i] += parseFloat(mydata[i][o]);
         }
       }
       // interpolation color
       const maxValue = yValues[0];
       mycolor = yValues.map((d) => colorScalar[21 - parseInt(d / maxValue * 21)])
-    },
-    error: function (error) {
-    },
-    async: false
-  });
+
 
 
   const picConfig = {
@@ -377,7 +372,7 @@
   };
   lineChart = new Chart(document.getElementById("line").getContext("2d"), lineConfig);
 
-
+  });
   let tmpColor = cityList.map((v, i, a) => mycolor[xValues.indexOf(v)]); //citylist
   //https://unpkg.com/us-atlas/states-10m.json
   //https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/twn.json 
