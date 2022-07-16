@@ -454,7 +454,8 @@
       }
     };
     chartMap = new Chart(document.getElementById("map").getContext("2d"), mapConfig);
-  }).then(()=>initCallback());
+    initCallback();
+  });
 
 
 });
