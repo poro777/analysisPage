@@ -275,7 +275,6 @@
   fetch('./analysis.csv').then(response => response.text())
     .then(function (a) {
       mydata = $.csv.toArrays(a).map(arr => arr.map(str => parseFloat(str)));
-      console.log(mydata);
       for (let i = 0; i < 22; i++) {
         yValues[i] = 0;
         for (let o = 0; o < 12; o++) {
