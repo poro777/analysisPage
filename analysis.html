@@ -5,8 +5,8 @@
 <head>
   <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
     crossorigin="anonymous"></script>
-  <script src="../static/node_modules/chart.js/dist/chart.min.js"></script>
-  <script src="../static/node_modules/chartjs-chart-geo/build/index.umd.min.js"></script>
+  <script src="./chart.min.js"></script>
+  <script src="./index.umd.min.js"></script>
 
   <!-- https://github.com/DavideViolante/chartjs-plugin-labels -->
   <script src="https://unpkg.com/chart.js-plugin-labels-dv/dist/chartjs-plugin-labels.min.js"></script>
@@ -273,7 +273,7 @@
   // get data
   $.ajax({
     type: "GET",
-    url: host + "/summary",
+    url: "/summary.csv",
     dataType: "json",
     success: function (response) {
       mydata = Array.from(response);
@@ -381,7 +381,7 @@
   let tmpColor = cityList.map((v, i, a) => mycolor[xValues.indexOf(v)]); //citylist
   //https://unpkg.com/us-atlas/states-10m.json
   //https://raw.githubusercontent.com/markmarkoh/datamaps/master/src/js/data/twn.json 
-  fetch('../static/tw.json').then((r) => r.json()).then((tw) => {
+  fetch('./tw.json').then((r) => r.json()).then((tw) => {
     let nation; //tw.json
     let county = Array(22);//citylist
 
